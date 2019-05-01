@@ -1,0 +1,33 @@
+that was once suggested and no one (except me) reacted to it
+I guess everyone found their limits and is happy with them
+
+What I would try: 
+start with 50 follows and 100 likes per day 
+then every day add 20 follows and 50 likes 
+after one month you should be at 500 follows a day and at like 1600 likes a day These are pretty safe 
+numbers I guess 
+unfollow after 4-5 days (I'd to about 200 unfollows for the first 2 weeks then 
+increase to 400 then after a month do 500 unfollows to keep a steady follower count )
+
+
+Identify accounts that are bots and block them from following
+
+
+it would be cool to follow users / like  posts of users who have a high following to follower ratio. 
+they are more likely to follow you
+then scan they're followers for the same
+like a couple of they're pics etc
+unfollow a couple of days later (if your that way inclined)
+or even just use that function just to like the posts
+
+also is it possible to make a list of people who you followed then unfollowed. 
+just so you dont keep following them
+also the accounts shouldnt be random, they must have common hashtags
+so you would find the users via a hashtag
+and then let it run from there etc
+
+also you need to distinguish who your actualy friends are on there
+just so you dont end up unfollollowing people you actually know
+possibly creating a list of all people followerd / liked using the script.
+so that the people you actually follow using the normal app , it dosnt record them
+also what would be cool is to be able to do this with multiple accounts at once,

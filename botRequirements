@@ -1,0 +1,55 @@
+Raspberry Pi 2 Model B
+
+would like a report on the poster ideally to help us find 
+the top posters: 
+User A 
+Posts: 1,000 posts 
+Followers: 14.3k followers 
+last 3 posts likes: 
+1 days ago: 1,380 likes 
+2 days ago: 2,320 likes 
+4 days ago: 2,101 likes 
+
+2) once we have a report we will manually 
+message posters to share our posts but yes 
+I would like a bot to comment, like, follow, 
+unfollow all posts.
+
+Here’s how: 
+1) Find hashtag 
+2) Search through results (1000 or so) 
+3) select url hyperlink. 
+- scrape followers 
+- scrape likes
+
+import lzma
+import os
+import json
+
+for file in os.listdir(os.getcwd()):
+    print(file)
+	f = lzma.open(file, mode='rt', encoding='utf-8').read()
+	js = json.loads(f)
+
+["node"]["owner"]
+
+
+
+instaloader "#sourdough" --post-filter="likes>100" --no-captions --no-pictures
+
+# Get info from profile - must be logged in.
+p = Profile.from_username(L.context, p.owner_username)
+for x in p.get_followers():
+	print(x)
+
+from pathlib import Path
+p = Path('.')
+pp = Path('afirdworld')
+f = lzma.open(pp / "2019-04-04_04-50-32_UTC.json.xz", mode='rt', encoding='utf-8').read()
+
+## CUSTOMER REQUESTS
+- Follow competitor followers
+- Search hashtags and find the most popular posters
+  - Report number of, followers, posts and likes for the current picture.
+- Follow, unfollow, comment, like, message <- messaging not possible in python.
+
