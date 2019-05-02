@@ -31,27 +31,42 @@ COMMENTS = ['This picture is great!!!',
         'I can feel your passion @{} :muscle:']
 
 # Interaction based on the numbers of followers / following a user has
-ENABLE_RELATIONSHIP_BOUNDS = False
-POTENCY_RATIO = 1.34
+# DELIMIT_BY_NUMBERS activates/deactivates the usage of max/min
+# potency_ratio = followers / following.
+# Positive numbers to route interactions to only potential users 
+# whose followers count is higher than following count.
+ENABLE_RELATIONSHIP_BOUNDS = True
+POTENCY_RATIO = None
 DELIMIT_BY_NUMBERS = True
-MAX_FOLLOWERS = 3000
-MAX_FOLLOWING = 900 
+MAX_FOLLOWERS = 500
+MAX_FOLLOWING = 500 
 MIN_FOLLOWERS = 50 
 MIN_FOLLOWING = 50 
 MIN_POSTS = 10
 MAX_POSTS = 1000
 
 # Conservative numbers for new accounts.
-# Every day you can add 20 follows and 50 likes.
-# First value is the hourly and second daily value. They are peak values.
+# Every day you can like 25-45 per session.
+
+# Follow 50-75 per day. Increase each day with 50 until 
+# it reaches 450 max followers per day
 # Credits to: haetschgern for the tip.
-PEAK_LIKES = (35, 100)
-PEAK_FOLLOWS = (35, 100)
+PEAK_LIKES = (25, 75)
+PEAK_FOLLOWS = (25, 75)
 PEAK_UNFOLLOWS = (35, 100)
 PEAK_SERVER_CALLS = (500, 4745)
-PEAK_COMMENTS = (None, None)
+PEAK_COMMENTS = (5, 15)
+
+# Skip non English Users
+# User has profile image
+# User posted in the last 90 days
+# Skip business accounts
+# User has 0-1500 and 20-1000 followers/followings
+# follow users who commented in the last 3 days (3660 minutes)
+
 
 SMART_HASHTAG = 'sourdough'
+IGNORE_LIKING_USERS = []
 
 # Smart hashtags wasn't working so I implemented the function
 HASHTAGS = get_hashtags(SMART_HASHTAG)
@@ -88,7 +103,7 @@ with smart_run(session):
     # do all available actions.
     # If server calls reachs its peak, it will exit the program.
     # Sleeping: likes_h for hourly. likes_d for daily
-    session.set_quota_supervisor(enabled=True, 
+    session.set_quota_supervisor(enabled=True,
                     peak_likes=PEAK_LIKES,
                     peak_comments=PEAK_COMMENTS,
                     peak_follows=PEAK_FOLLOWS, 
@@ -98,13 +113,19 @@ with smart_run(session):
                     sleepyhead=True,
                     stochastic_flow=True, notify_me=True)
 
+    session.set_skip_users(skip_private=True,
+                    private_percentage=100,
+                    skip_no_profile_pic=True,
+                    no_profile_pic_percentage=100)
+
     # will prevent commenting on and unfollowing your good friends (the images will
     # still be liked)
-    #session.set_dont_include(['friend1', 'friend2', 'friend3'])
+    # session.set_dont_include(['friend1', 'friend2', 'friend3'])
     # Prevents unfollow followers who have liked one of your latest 5 posts
-    #session.set_dont_unfollow_active_users(enabled=True, posts=5)
+    # session.set_dont_unfollow_active_users(enabled=True, posts=5)
 
     # Actions for the bot
+    session.set_ignore_users(IGNORE_LIKING_USERS)
     
     # Checks number of existing comments a post has.
     session.set_delimit_commenting(enabled=True, max=12, min=None)
@@ -112,11 +133,17 @@ with smart_run(session):
     session.set_comments(COMMENTS, media='Photo')
 
     # SMART HASHTAGS ISN'T WORKING FOR ME.
-    #session.set_smart_hashtags(SMART_HASHTAG, limit=10, sort='random', log_tags=True)
+    # session.set_smart_hashtags(SMART_HASHTAG, limit=10, sort='random', log_tags=True)
     # amount of posts that will be liked.
+
     session.set_user_interact(amount=3, randomize=True, percentage=100, media='Photo')
     session.like_by_tags(HASHTAGS, amount=25, use_smart_hashtags=False, skip_top_posts=True, 
                         interact=True)
+    session.set_delimit_liking(enabled=True, max=125, min=None)
     
     # Performs likes on your own feeds
     session.like_by_feed(amount=70, randomize=True)
+
+    # unfollow users who aren't following back
+    session.unfollow_users(amount=75, nonFollowers=True, style="FIFO", 
+                        unfollow_after=42*60*60, sleep_delay=450)
