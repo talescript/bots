@@ -16,8 +16,8 @@ from get_smart_hashtags import get_hashtags
 # Using environment variables instead of hardcoding your username and password.
 # Place in .bashrc file or whichever is used by your distro.
 # Remember to reload the file and restart the terminal.
-insta_username = os.environ.get('DB_USER')
-insta_password = os.environ.get('DB_PASS')
+insta_username = os.environ.get('IG_USER')
+insta_password = os.environ.get('IG_PASSWORD')
 
 COMMENTS = ['This picture is great!!!',
         'Nice! This picture is great.',
