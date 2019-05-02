@@ -16,11 +16,8 @@ from get_smart_hashtags import get_hashtags
 # Using environment variables instead of hardcoding your username and password.
 # Place in .bashrc file or whichever is used by your distro.
 # Remember to reload the file and restart the terminal.
-insta_username = os.environ.get('IG_USER')
-insta_password = os.environ.get('IG_PASSWORD')
-
-# Change to "False" if using chrome
-FIREFOX = True
+insta_username = "the_lame_icepick"
+insta_password = "deceptions founders manama"
 
 COMMENTS = ['This picture is great!!!',
         'Nice! This picture is great.',
@@ -48,9 +45,9 @@ MAX_POSTS = 1000
 # Every day you can add 20 follows and 50 likes.
 # First value is the hourly and second daily value. They are peak values.
 # Credits to: haetschgern for the tip.
-PEAK_LIKES = (15, 100)
-PEAK_FOLLOWS = (8, 50)
-PEAK_UNFOLLOWS = (6, 70)
+PEAK_LIKES = (35, 100)
+PEAK_FOLLOWS = (35, 100)
+PEAK_UNFOLLOWS = (35, 100)
 PEAK_SERVER_CALLS = (500, 4745)
 PEAK_COMMENTS = (None, None)
 
@@ -66,7 +63,7 @@ HASHTAGS = get_hashtags(SMART_HASHTAG)
 session = InstaPy(username=insta_username, 
             password=insta_password,
             headless_browser=True,
-            use_firefox=FIREFOX,
+            use_firefox=True,
             disable_image_load=True,
             split_db=True,
             multi_logs=True)
@@ -118,7 +115,7 @@ with smart_run(session):
     #session.set_smart_hashtags(SMART_HASHTAG, limit=10, sort='random', log_tags=True)
     # amount of posts that will be liked.
     session.set_user_interact(amount=3, randomize=True, percentage=100, media='Photo')
-    session.like_by_tags(HASHTAGS, amount=25, use_smart_hashtags=False, skip_top_posts=False, 
+    session.like_by_tags(HASHTAGS, amount=25, use_smart_hashtags=False, skip_top_posts=True, 
                         interact=True)
     
     # Performs likes on your own feeds
