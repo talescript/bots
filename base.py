@@ -57,11 +57,9 @@ PEAK_UNFOLLOWS = (35, 100)
 PEAK_SERVER_CALLS = (500, 4745)
 PEAK_COMMENTS = (5, 15)
 
+# PENDING
 # Skip non English Users
-# User has profile image
 # User posted in the last 90 days
-# Skip business accounts
-# User has 0-1500 and 20-1000 followers/followings
 # follow users who commented in the last 3 days (3660 minutes)
 
 
@@ -113,6 +111,8 @@ with smart_run(session):
                     sleepyhead=True,
                     stochastic_flow=True, notify_me=True)
 
+    # Skip business accounts
+    # User has profile image
     session.set_skip_users(skip_private=True,
                     private_percentage=100,
                     skip_no_profile_pic=True,
