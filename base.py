@@ -19,14 +19,14 @@ from get_smart_hashtags import get_hashtags
 insta_username = os.environ.get('IG_USER')
 insta_password = os.environ.get('IG_PASSWORD')
 
-COMMENTS = ['This picture is great!!!',
-        'Nice! This picture is great.',
-        'The pic is really amazing.',
-        'Just incredible :open_mouth:',
-        'Damn your picture is really quite impressive. Keep it up.',
+COMMENTS = ['Your picture is great!!!',
+        'Nice! This picture is fantastic.',
+        'The pic is really beautiful.',
+        'Lovely :open_mouth:',
+        'Damn your picture is terrific. Keep it up.',
         'Love your posts @{}',
-        'Nice! Your post is terrific.',
-        'Darn, your shot is really quite lovely.',
+        'Your post is awesome.',
+        'Your shot is quite lovely.',
         ':raised_hands: Yes!',
         'I can feel your passion @{} :muscle:']
 
@@ -63,7 +63,7 @@ PEAK_COMMENTS = (5, 15)
 # follow users who commented in the last 3 days (3660 minutes)
 
 
-SMART_HASHTAG = 'sourdough'
+SMART_HASHTAG = 'italy'
 IGNORE_LIKING_USERS = []
 
 # Smart hashtags wasn't working so I implemented the function
@@ -101,15 +101,15 @@ with smart_run(session):
     # do all available actions.
     # If server calls reachs its peak, it will exit the program.
     # Sleeping: likes_h for hourly. likes_d for daily
-    session.set_quota_supervisor(enabled=True,
-                    peak_likes=PEAK_LIKES,
-                    peak_comments=PEAK_COMMENTS,
-                    peak_follows=PEAK_FOLLOWS, 
-                    peak_unfollows=PEAK_UNFOLLOWS,
-                    peak_server_calls=PEAK_SERVER_CALLS,
-                    sleep_after=["likes", "comments", "follows", "unfollows", "server_calls"],
-                    sleepyhead=True,
-                    stochastic_flow=True, notify_me=True)
+#     session.set_quota_supervisor(enabled=True,
+#                     peak_likes=PEAK_LIKES,
+#                     peak_comments=PEAK_COMMENTS,
+#                     peak_follows=PEAK_FOLLOWS, 
+#                     peak_unfollows=PEAK_UNFOLLOWS,
+#                     peak_server_calls=PEAK_SERVER_CALLS,
+#                     sleep_after=["likes", "comments", "follows", "unfollows", "server_calls"],
+#                     sleepyhead=True,
+#                     stochastic_flow=True, notify_me=True)
 
     # Skip business accounts
     # User has profile image
@@ -135,14 +135,13 @@ with smart_run(session):
     # SMART HASHTAGS ISN'T WORKING FOR ME.
     # session.set_smart_hashtags(SMART_HASHTAG, limit=10, sort='random', log_tags=True)
     # amount of posts that will be liked.
-
     session.set_user_interact(amount=3, randomize=True, percentage=100, media='Photo')
-    session.like_by_tags(HASHTAGS, amount=25, use_smart_hashtags=False, skip_top_posts=True, 
-                        interact=True)
     session.set_delimit_liking(enabled=True, max=125, min=None)
     
     # Performs likes on your own feeds
     session.like_by_feed(amount=70, randomize=True)
+    session.like_by_tags(HASHTAGS, amount=25, use_smart_hashtags=False, skip_top_posts=True, 
+                        interact=True)
 
     # unfollow users who aren't following back
     session.unfollow_users(amount=75, nonFollowers=True, style="FIFO", 
