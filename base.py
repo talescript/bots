@@ -109,7 +109,7 @@ with smart_run(session):
 #                     peak_server_calls=PEAK_SERVER_CALLS,
 #                     sleep_after=["likes", "comments", "follows", "unfollows", "server_calls"],
 #                     sleepyhead=True,
-#                     stochastic_flow=True, notify_me=True)
+#                     stochastic_flow=True, notify_me=False)
 
     # Skip business accounts
     # User has profile image
