@@ -63,7 +63,7 @@ PEAK_COMMENTS = (5, 15)
 # follow users who commented in the last 3 days (3660 minutes)
 
 
-SMART_HASHTAG = 'italy'
+SMART_HASHTAG = 'sourdough'
 IGNORE_LIKING_USERS = []
 
 # Smart hashtags wasn't working so I implemented the function
@@ -128,7 +128,8 @@ with smart_run(session):
     session.set_ignore_users(IGNORE_LIKING_USERS)
     
     # Checks number of existing comments a post has.
-    session.set_delimit_commenting(enabled=True, max=12, min=None)
+    # set_delimit has a bug that prevents commenting
+    # session.set_delimit_commenting(enabled=True, max=12, min=None)
     session.set_do_comment(enabled=True, percentage=70)
     session.set_comments(COMMENTS, media='Photo')
 
