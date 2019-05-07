@@ -12,23 +12,15 @@ from instapy import InstaPy
 from instapy import smart_run
 
 from get_smart_hashtags import get_hashtags
+from better_comments.py import create_comment, WORD_LIST
 
 insta_username = os.environ.get('IG_SOUR')
 insta_password = os.environ.get('IG_SOURPASS')
 
-COMMENTS = ['Your picture is great!!!',
-        'Nice! This picture is fantastic.',
-        'The pic is really beautiful.',
-        'Lovely :open_mouth:',
-        'Damn your picture is terrific. Keep it up.',
-        'Love your posts @{}',
-        'Your post is awesome.',
-        'Your shot is quite lovely.',
-        ':raised_hands: Yes!',
-        'I can feel your passion @{} :muscle:']
-
 SMART_HASHTAGS = 'sourdough'
 HASHTAGS = get_hashtags(SMART_HASHTAGS)
+
+COMMENTS = create_comment(WORD_LIST, 20)
 
 session = InstaPy(username=insta_username, password=insta_password,
         headless_browser=True, disable_image_load=True)
