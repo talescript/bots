@@ -11,7 +11,7 @@ import os
 from instapy import InstaPy
 from instapy import smart_run
 
-from get_smart_hashtags import get_hashtags
+from plugins.get_smart_hashtags import get_hashtags
 
 insta_username = os.environ.get('IG_SOUR')
 insta_password = os.environ.get('IG_SOURPASS')
@@ -19,7 +19,8 @@ insta_password = os.environ.get('IG_SOURPASS')
 session = InstaPy(username=insta_username,
         password=insta_password,
         headless_browser=True,
-        disable_image_load=True)
+        disable_image_load=True,
+        split_db=True)
 
 with smart_run(session):
     session.like_by_feed(amount=70, randomize=True)

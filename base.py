@@ -11,7 +11,7 @@ import os
 from instapy import InstaPy
 from instapy import smart_run
 
-from get_smart_hashtags import get_hashtags
+from plugins.get_smart_hashtags import get_hashtags
 
 # Using environment variables instead of hardcoding your username and password.
 # Place in .bashrc file or whichever is used by your distro.

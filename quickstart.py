@@ -11,8 +11,8 @@ import os
 from instapy import InstaPy
 from instapy import smart_run
 
-from get_smart_hashtags import get_hashtags
-from better_comments.py import create_comment, WORD_LIST
+from plugins.get_smart_hashtags import get_hashtags
+from plugins.better_comments.py import create_comment, WORD_LIST
 
 insta_username = os.environ.get('IG_SOUR')
 insta_password = os.environ.get('IG_SOURPASS')
@@ -23,7 +23,7 @@ HASHTAGS = get_hashtags(SMART_HASHTAGS)
 COMMENTS = create_comment(WORD_LIST, 20)
 
 session = InstaPy(username=insta_username, password=insta_password,
-        headless_browser=True, disable_image_load=True)
+        headless_browser=True, disable_image_load=True, split_db=True)
 
 with smart_run(session):
     # settings first
