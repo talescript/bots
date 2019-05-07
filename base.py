@@ -30,45 +30,16 @@ COMMENTS = ['Your picture is great!!!',
         ':raised_hands: Yes!',
         'I can feel your passion @{} :muscle:']
 
-# Interaction based on the numbers of followers / following a user has
-# DELIMIT_BY_NUMBERS activates/deactivates the usage of max/min
-# potency_ratio = followers / following.
-# Positive numbers to route interactions to only potential users 
-# whose followers count is higher than following count.
-ENABLE_RELATIONSHIP_BOUNDS = True
-POTENCY_RATIO = None
-DELIMIT_BY_NUMBERS = True
-MAX_FOLLOWERS = 500
-MAX_FOLLOWING = 500 
-MIN_FOLLOWERS = 50 
-MIN_FOLLOWING = 50 
-MIN_POSTS = 10
-MAX_POSTS = 1000
-
-# Conservative numbers for new accounts.
-# Every day you can like 25-45 per session.
-
-# Follow 50-75 per day. Increase each day with 50 until 
-# it reaches 450 max followers per day
-# Credits to: haetschgern for the tip.
-PEAK_LIKES = (25, 75)
-PEAK_FOLLOWS = (25, 75)
-PEAK_UNFOLLOWS = (35, 100)
-PEAK_SERVER_CALLS = (500, 4745)
-PEAK_COMMENTS = (5, 15)
-
 # PENDING
 # Skip non English Users
 # User posted in the last 90 days
 # follow users who commented in the last 3 days (3660 minutes)
-
 
 SMART_HASHTAG = 'sourdough'
 IGNORE_LIKING_USERS = []
 
 # Smart hashtags wasn't working so I implemented the function
 HASHTAGS = get_hashtags(SMART_HASHTAG)
-
 
 # Get an InstaPy session!
 # Set headless_browser to true to run InstaPy in the background
@@ -87,29 +58,34 @@ with smart_run(session):
     # Interaction based on the numbers of followers / following a user has
     # Change to True to use these checks
     # Documentation is your friend.
-    session.set_relationship_bounds(enabled=ENABLE_RELATIONSHIP_BOUNDS, 
-                    potency_ratio=POTENCY_RATIO, 
-                    delimit_by_numbers=DELIMIT_BY_NUMBERS, 
-                    max_followers=MAX_FOLLOWERS,
-                    max_following=MAX_FOLLOWING, 
-                    min_followers=MIN_FOLLOWERS, 
-                    min_following=MIN_FOLLOWING, 
-                    min_posts=MIN_POSTS, 
-                    max_posts=MAX_POSTS)
+    session.set_relationship_bounds(enabled=True, 
+                    potency_ratio=None, 
+                    delimit_by_numbers=True, 
+                    max_followers=2200,
+                    max_following=500, 
+                    min_followers=45, 
+                    min_following=77, 
+                    min_posts=10, 
+                    max_posts=1500)
 
     # Once it reaches it's peak, it will jump every other action and it will
     # do all available actions.
     # If server calls reachs its peak, it will exit the program.
     # Sleeping: likes_h for hourly. likes_d for daily
-#     session.set_quota_supervisor(enabled=True,
-#                     peak_likes=PEAK_LIKES,
-#                     peak_comments=PEAK_COMMENTS,
-#                     peak_follows=PEAK_FOLLOWS, 
-#                     peak_unfollows=PEAK_UNFOLLOWS,
-#                     peak_server_calls=PEAK_SERVER_CALLS,
-#                     sleep_after=["likes", "comments", "follows", "unfollows", "server_calls"],
-#                     sleepyhead=True,
-#                     stochastic_flow=True, notify_me=False)
+    # Conservative numbers for new accounts.
+    # Every day you can like 25-45 per session.
+
+    # Follow 50-75 per day. Increase each day with 50 until 
+    # it reaches 450 max followers per day
+    # session.set_quota_supervisor(enabled=True,
+    #                 peak_likes=(25, 75),
+    #                 peak_comments=(5, 15),
+    #                 peak_follows=(25, 75), 
+    #                 peak_unfollows=(35, 100),
+    #                 peak_server_calls=(500, 4745),
+    #                 sleep_after=["likes", "comments", "follows", "unfollows", "server_calls"],
+    #                 sleepyhead=True,
+    #                 stochastic_flow=True, notify_me=False)
 
     # Skip business accounts
     # User has profile image
@@ -136,11 +112,11 @@ with smart_run(session):
     # SMART HASHTAGS ISN'T WORKING FOR ME.
     # session.set_smart_hashtags(SMART_HASHTAG, limit=10, sort='random', log_tags=True)
     # amount of posts that will be liked.
-    session.set_user_interact(amount=3, randomize=True, percentage=100, media='Photo')
+    session.set_user_interact(amount=2, randomize=True, percentage=65, media='Photo')
     session.set_delimit_liking(enabled=True, max=125, min=None)
     
     # Performs likes on your own feeds
-    session.like_by_feed(amount=70, randomize=True)
+    session.like_by_feed(amount=240, randomize=True)
     session.like_by_tags(HASHTAGS, amount=25, use_smart_hashtags=False, skip_top_posts=True, 
                         interact=True)
 
