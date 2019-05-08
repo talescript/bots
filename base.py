@@ -12,6 +12,7 @@ from instapy import InstaPy
 from instapy import smart_run
 
 from plugins.get_smart_hashtags import get_hashtags
+from plugins.better_comments import WORD_LIST, create_comment
 
 # Using environment variables instead of hardcoding your username and password.
 # Place in .bashrc file or whichever is used by your distro.
@@ -19,24 +20,14 @@ from plugins.get_smart_hashtags import get_hashtags
 insta_username = os.environ.get('IG_USER')
 insta_password = os.environ.get('IG_PASSWORD')
 
-COMMENTS = ['Your picture is great!!!',
-        'Nice! This picture is fantastic.',
-        'The pic is really beautiful.',
-        'Lovely :open_mouth:',
-        'Damn your picture is terrific. Keep it up.',
-        'Love your posts @{}',
-        'Your post is awesome.',
-        'Your shot is quite lovely.',
-        ':raised_hands: Yes!',
-        'I can feel your passion @{} :muscle:']
-
 # PENDING
 # Skip non English Users
 # User posted in the last 90 days
 # follow users who commented in the last 3 days (3660 minutes)
 
-SMART_HASHTAG = 'sourdough'
+SMART_HASHTAG = 'panama'
 IGNORE_LIKING_USERS = []
+COMMENTS = create_comment(WORD_LIST, 15)
 
 # Smart hashtags wasn't working so I implemented the function
 HASHTAGS = get_hashtags(SMART_HASHTAG)
@@ -51,7 +42,6 @@ session = InstaPy(username=insta_username,
             disable_image_load=True,
             split_db=True,
             multi_logs=True)
-
 
 with smart_run(session):
     """ Activity flow """
@@ -117,9 +107,9 @@ with smart_run(session):
     
     # Performs likes on your own feeds
     session.like_by_feed(amount=240, randomize=True)
-    session.like_by_tags(HASHTAGS, amount=25, use_smart_hashtags=False, skip_top_posts=True, 
+    session.like_by_tags(HASHTAGS, amount=15, use_smart_hashtags=False, skip_top_posts=True, 
                         interact=True)
 
     # unfollow users who aren't following back
-    session.unfollow_users(amount=75, nonFollowers=True, style="FIFO", 
-                        unfollow_after=42*60*60, sleep_delay=450)
+    #session.unfollow_users(amount=75, nonFollowers=True, style="FIFO", 
+    #                    unfollow_after=42*60*60, sleep_delay=450)

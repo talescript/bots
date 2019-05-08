@@ -18,6 +18,8 @@ https://www.imore.com/how-use-text-shortcuts-iphone-and-ipad
 
 * Measure effectiveness
 
+#food, #instafood, #foodporn
+
 ***********************
 
 Measuring engagement rate
@@ -33,7 +35,73 @@ Go to the explorer page to discover influencers in your area.
 * Identify the most influential hashtag within your topic
 * Identify the hashtags that the accounts in the top posts are using
 
+* Best time to post is Tuesday through Friday from 10 a.m. - 3 p.m.
+* Peak times are Wednesday at 11 a.m and Friday at 10-11 a.m.
 
+************************
+
+* Wait 4-5 days before unfollowing someone
+* Can not follow more than 7,500 people
+
+* The average number of followers for a personal account is 150
+* Above 15,000 followers users perceive you as an influencer
+
+## Ratio indicator
+* For followers between 1,000 and 15,000 here's what your ratio tells
+* Follower / Following
+* < 0.5 Spammer
+* 0.5 - 1 Suspicious
+* 1 - 2 Normal 
+* 2 - 10 Micro Influencer
+* 10+ Influencer
+
+To calculate: Follower / Following 
+13.152 Followers / 1571 Following = 8.3 - Micro influencer
+
+************************
+
+# Limits
+
+* New acounts that only been active for a few months
+- can only follow / unfollow about 20 users an hour and max 100-200 a day
+* Old acounts that have been active for years
+- limits increase to 50 follows/unfollows an hour, and 300-400 a day
+
+*************************
+
+## Three types of bans
+
+* Action blocks: This occurs when you have performed actions too quickly, 
+	such as: likes, follow and unfollowing users.
+		actions blocks normally get lifted after 24h or a few days.
+* Shadow Bans: This occurs when you've posted too frequently or used tags
+	that have been banned. Shadow bans prevent your posts from
+	appearning in the tags you use.
+
+	HOOTSUITE - states there is no such thing as a shadowban
+
+* Bans: Bans occur when you have continually received action blocks or is 
+	in clear violation of Instagram's terms of service. Bans will
+	often result in account deletion.
+
+* Use a proxy
+
+****************************
+
+* Neither Verified users nor business accounts get special treatment
+
+****************************
+
+## Tips to make the instagram algo work in your favor
+
+1. Post more often
+	quality and quantity
+2. Post when your audience is looking
+3. Be personable
+	Write compelling captions. Chat with people in the comments, ask questions.
+	Like other people's posts, and comment on them.
+4. Run a contest
+5. Encourage people to turn on notifications
 
 
 
