@@ -7,6 +7,7 @@
 """
 
 import os
+import random
 
 from instapy import InstaPy
 from instapy import smart_run
@@ -20,7 +21,8 @@ insta_password = os.environ.get('IG_SOURPASS')
 SMART_HASHTAGS = ['sourdough']
 HASHTAGS = []
 
-for tag in SMART_HASHTAGS:
+# k choices will repeat X times if list has less elements
+for tag in random.choices(SMART_HASHTAGS, k=1):
     for t in get_hashtags(tag):
         HASHTAGS.append(t)
 
