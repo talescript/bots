@@ -17,8 +17,12 @@ from plugins.better_comments.py import create_comment, WORD_LIST
 insta_username = os.environ.get('IG_SOUR')
 insta_password = os.environ.get('IG_SOURPASS')
 
-SMART_HASHTAGS = 'sourdough'
-HASHTAGS = get_hashtags(SMART_HASHTAGS)
+SMART_HASHTAGS = ['sourdough']
+HASHTAGS = []
+
+for tag in SMART_HASHTAGS:
+    for t in get_hashtags(tag):
+        HASHTAGS.append(t)
 
 COMMENTS = create_comment(WORD_LIST, 20)
 
