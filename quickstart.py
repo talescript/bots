@@ -1,4 +1,4 @@
-! /usr/bin/env python
+#!/usr/bin/env python
 # -*- coding: utf-8- -*-
 """ Performs actions on your own feed / users
 
@@ -13,7 +13,7 @@ from instapy import InstaPy
 from instapy import smart_run
 
 from plugins.get_smart_hashtags import get_hashtags
-from plugins.better_comments.py import create_comment, WORD_LIST
+from plugins.better_comments import create_comment, WORD_LIST
 
 insta_username = os.environ.get('IG_SOUR')
 insta_password = os.environ.get('IG_SOURPASS')
@@ -25,6 +25,8 @@ HASHTAGS = []
 for tag in random.choices(SMART_HASHTAGS, k=1):
     for t in get_hashtags(tag):
         HASHTAGS.append(t)
+
+print(HASHTAGS)
 
 COMMENTS = create_comment(WORD_LIST, 20)
 
@@ -46,6 +48,7 @@ with smart_run(session):
 
     # then actions
     session.set_dont_unfollow_active_users(enabled=True, posts=6)
+    session.set_dont_include('friend1', 'friend2'])
     session.set_do_comment(enabled=True, percentage=55)
     session.set_comments(COMMENTS)
     session.set_do_follow(enabled=True, percentage=65, times=2)
