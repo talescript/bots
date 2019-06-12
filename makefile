@@ -1,18 +1,40 @@
-install: pyenv .venv ## Activate venv and install dependencies
-	pip install -U pip
-	pip install instapy
+pyVersion = 3.7.3
 
-VENV = .venv
-export VIRTUAL_ENV := $(abspath ${VENV})
-export $PATH := ${VIRTUAL_ENV}/bin:${PATH}
+install: pyenv pyenv-install pyenv-venv  ## Activate venv and install dependencies
+	( \
+		python -m venv venv; \
+		. venv/bin/activate; \
+		pip install -U pip; \
+		pip install instapy; \
+		)
 
-${VENV}:
-	python -m venv $@
+installi-raspberri: pyenv pyenv-install pyenv-venv  ## Activate venv and install dependencies
+	( \
+		python -m venv venv; \
+		. venv/bin/activate; \
+		pip install -U pip; \
+		pip install instapy; \
+		pip uninstall instapy-chromedriver; \
+		pip install instapy-chromedriver==2.36.post0
+		)
 
-pyenv: pyenv-dev pyenv-install ## installs pyenv - "run: pyenv install -v <version.number>" 
+pyenv: pyenv-dev ## installs pyenv - "run: pyenv install after" 
 	curl https://pyenv.run | bash
 	exec "$SHELL"
-	pyenv install --list | grep " 3\.[789]" | grep -v "dev"
+	pyenv install --list | grep -v '[a-z,0-2]'
+
+pyenv-install: # installs latest python version
+	pyenv install $(pyVersion)
+	pyenv global $(pyVersion)
+
+pyenv-update: ## update pyenv
+	pyenv update
+
+pyenv-venv: # Creates a virtual environment
+	python -m venv venv
+
+pyenv-delete: ## delete pyenv
+	-rm -fr ~/.pyenv
 
 pyenv-dev: ## development prerequisites (debian)
 	sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev \
@@ -22,23 +44,12 @@ pyenv-dev: ## development prerequisites (debian)
 pyenv-libedit: ## alternative to libreadline-dev
 	sudo apt install libedit-dev -y
 
-pyenv-install: # installs latest python version
-	pyenv install 3.7.3
-	pyenv global 3.7.3
-
-pyenv-update: ## update pyenv
-	pyenv update
-
-pyenv-delete: ## delete pyenv
-	rm -fr ~/.pyenv
-
 clean: ## Removes __pycache__
-	rm -rf __pycache__
-
-.PHONY: help
+	-rm -rf __pycache__
 
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 .DEFAULT_GOAL := help
-
+.PHONY: help install clean pyenv pyenv-install pyenv-update \
+   	pyenv-delete pyenv-dev
