@@ -3,7 +3,7 @@ pyVersion = 3.7.3
 VENV_NAME?=venv
 venv: $(VENV_NAME)/bin/activate
 
-all: pyenv pyenv-install venv/bin/activate ## Fire and forget boys.
+all: pyenv pyenv-install venv/bin/activate ## Fire and forget boys
 	echo "All done."
 
 venv/bin/activate: 
