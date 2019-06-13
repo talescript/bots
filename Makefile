@@ -1,6 +1,10 @@
 pyVersion = 3.7.3
 
-install: pyenv pyenv-install pyenv-venv  ## Activate venv and install dependencies
+VENV_NAME?=venv
+VENV_ACTIVATE=. $(VENV_NAME)/bin/activate
+PYTHON=${VENV_NAME}/bin/python3
+
+install: pyenv pyenv-install  ## Activate venv and install dependencies
 	( \
 		python -m venv venv; \
 		. venv/bin/activate; \
@@ -8,30 +12,24 @@ install: pyenv pyenv-install pyenv-venv  ## Activate venv and install dependenci
 		pip install instapy; \
 		)
 
-installi-raspberri: pyenv pyenv-install pyenv-venv  ## Activate venv and install dependencies
-	( \
-		python -m venv venv; \
-		. venv/bin/activate; \
-		pip install -U pip; \
-		pip install instapy; \
-		pip uninstall instapy-chromedriver; \
-		pip install instapy-chromedriver==2.36.post0
-		)
+venv: $(VENV_NAME)/bin/activate
+venv/bin/activate: requirements.txt
+	text -d venv || . venv/bin/activate
+	venv/bin/pip3 install -U pip
+	venv/bin/pip3 install instapy
+	touch venv/bin/activate
+
 
 pyenv: pyenv-dev ## installs pyenv - "run: pyenv install after" 
 	curl https://pyenv.run | bash
-	exec "$SHELL"
 	pyenv install --list | grep -v '[a-z,0-2]'
 
-pyenv-install: # installs latest python version
+pyenv-install: ## installs latest python version
 	pyenv install $(pyVersion)
 	pyenv global $(pyVersion)
 
 pyenv-update: ## update pyenv
 	pyenv update
-
-pyenv-venv: # Creates a virtual environment
-	python -m venv venv
 
 pyenv-delete: ## delete pyenv
 	-rm -fr ~/.pyenv
