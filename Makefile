@@ -1,32 +1,33 @@
 pyVersion = 3.7.3
 
 VENV_NAME?=venv
-VENV_ACTIVATE=. $(VENV_NAME)/bin/activate
-PYTHON=${VENV_NAME}/bin/python3
-
-install: pyenv pyenv-install  ## Activate venv and install dependencies
-	( \
-		python -m venv venv; \
-		. venv/bin/activate; \
-		pip install -U pip; \
-		pip install instapy; \
-		)
-
 venv: $(VENV_NAME)/bin/activate
-venv/bin/activate: requirements.txt
-	text -d venv || . venv/bin/activate
-	venv/bin/pip3 install -U pip
-	venv/bin/pip3 install instapy
-	touch venv/bin/activate
 
+all: pyenv pyenv-install venv/bin/activate ## Fire and forget boys.
+	echo "All done."
+
+venv/bin/activate: 
+	text -d venv || python -m venv venv
+	venv/bin/pip3 install -U pip
+
+instabot-py: venv ## Installs instabot-py
+	venv/bin/pip3 install instabot-py
+
+instapy: venv ## Installs instapy
+	venv/bin/pip3 install instapy
+
+instapy-pi: instapy ## Installs instapy on raspberri
+	venv/bin/pip3 uninstall instapy-chromedriver
+	venv/bin/pip3 install instapy-chromedriver==2.36post0
 
 pyenv: pyenv-dev ## installs pyenv - "run: pyenv install after" 
 	curl https://pyenv.run | bash
 	pyenv install --list | grep -v '[a-z,0-2]'
 
-pyenv-install: ## installs latest python version
+pyenv-install: ## installs latest python version. Restart terminal window after running this command
 	pyenv install $(pyVersion)
 	pyenv global $(pyVersion)
+	echo "Restart the terminal window for changes to take effect"
 
 pyenv-update: ## update pyenv
 	pyenv update
